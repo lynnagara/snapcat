@@ -7,11 +7,11 @@ use std::cmp::max;
 pub struct ImageDiff {}
 
 impl ImageDiff {
-  pub fn compare(base_path: &str, new_path: &str, threshold: f32) {
+  pub fn compare(base_path: String, new_path: String, threshold: f32) {
     assert!(threshold <= 1. && threshold >= 0.);
 
-    let base_image = get_image_from_path(base_path);
-    let new_image = get_image_from_path(new_path);
+    let base_image = get_image_from_path(&base_path);
+    let new_image = get_image_from_path(&new_path);
     
     calculate_diff(base_image, new_image, threshold);
   }
