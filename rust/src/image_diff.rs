@@ -80,11 +80,16 @@ fn get_empty_image(width: u32, height: u32) -> ImageBuffer<Rgba<u8>, Vec<u8> > {
 }
 
 fn save(image: ImageBuffer<Rgba<u8>, Vec<u8> >, path: String) {
-  // ensure_dir_exists(&path);
+  ensure_dir_exists(&path);
   image.save(path).unwrap();
 }
 
-// fn ensure_dir_exists(path: &String) {
-//   let new_path = path.split("/").join("")
-//   create_dir_all(new_path);
-// }
+fn ensure_dir_exists(path: &String) {
+  // let new_path = path.split("/").join("");
+
+  let mut new_path_vec: Vec<&str> = path.split("/").collect();
+
+  new_path_vec.pop();
+
+  create_dir_all(new_path_vec.join("/"));
+}
