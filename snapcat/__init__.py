@@ -1,3 +1,5 @@
+from . import _native
+
 BASE_PATH = '.snapshots/'
 
 import re
@@ -16,7 +18,7 @@ class Snapcat():
     save(file_path)
 
   def compare(self):
-    subprocess.call('./target/release/snapcat ./images/pikachu1.png ./images/pikachu2.png 0.2', shell=True)
+    _native.lib.generate_diffs(0.1)
 
 def sanitize_file_path(path):
   sanitize = path.replace('/', '-')
