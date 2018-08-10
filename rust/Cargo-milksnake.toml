@@ -1,0 +1,15 @@
+[package]
+name = "snapcat"
+version = "0.1.0"
+authors = ["Lyn Nagara <lyn.nagara@gmail.com>"]
+build = "custom_build.rs"
+
+[lib]
+name = "snapcat"
+crate-type = ["cdylib"]
+
+[dependencies]
+image = "0.18.0"
+
+[build-dependencies]
+cbindgen = "0.5"
