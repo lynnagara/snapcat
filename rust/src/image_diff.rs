@@ -12,7 +12,7 @@ impl ImageDiff {
 
     let base_image = get_image_from_path(&base_path);
     let new_image = get_image_from_path(&new_path);
-    
+
     calculate_diff(base_image, new_image, threshold);
   }
 }
