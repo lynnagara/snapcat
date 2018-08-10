@@ -16,7 +16,6 @@ pub unsafe extern "C" fn generate_diffs(threshold: f32) {
     panic!("you are on the base branch!!!")
   }
 
-  let orig_files = get_directory_files(format!("{}{}", base, new));
   let new_files = get_directory_files(format!("{}{}", base, orig));
 
 
@@ -75,7 +74,7 @@ fn get_current_ref() -> String {
   let mut file = File::open(".git/HEAD").expect("File not found");
   let mut contents = String::new();
   file.read_to_string(&mut contents).expect("Error reading file");
-  let mut current_ref = contents.trim().split(" ").last().unwrap().to_string();
+  let current_ref = contents.trim().split(" ").last().unwrap().to_string();
 
   sanitize_file_path(&current_ref)
 }
