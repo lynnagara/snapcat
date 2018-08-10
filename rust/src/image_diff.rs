@@ -60,9 +60,11 @@ fn get_diff(a: u8, b: u8) -> u8 {
 }
 
 fn get_dimensions(base_image: &DynamicImage, new_image: &DynamicImage) -> (u32, u32) {
-  let width = max(base_image.dimensions().0, new_image.dimensions().0);
-  let height = max(base_image.dimensions().1, new_image.dimensions().1);
-  (height, width)
+  // Assume both the same for now
+  new_image.dimensions()
+  // let width = max(base_image.dimensions().0, new_image.dimensions().0);
+  // let height = max(base_image.dimensions().1, new_image.dimensions().1);
+  // (height, width)
 }
 
   
