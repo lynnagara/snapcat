@@ -7,12 +7,25 @@ use std::str;
 
 #[no_mangle]
 pub unsafe extern "C" fn generate_diffs(threshold: f32) {
-  let orig = String::from("refs-heads-snapcat");
+  let base = "./.snapshots/".to_string();
+  let orig = "refs-heads-snapcat".to_string();
   let new = get_current_ref();
-  // let orig = "./images/pikachu1.png".to_string();
-  // let new = "./images/pikachu2.png".to_string();
 
+  // bail if branches are the same
+  if orig == new {
+    panic!("you are on the base branch")
+  }
+
+  let orig_files = get_directory_files(format!("{}{}", base, new));
+  let new_files = get_directory_files(format!("{}{}", base, orig));
+
+
+  for new_file in new_files {
+    // get equivalent base file
+    println!("{:?}", new_file);
+  }
   image_diff::ImageDiff::compare(orig, new, threshold)
+
 }
 
 fn main() {

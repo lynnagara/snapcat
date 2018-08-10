@@ -1,0 +1,7 @@
+[package]
+name = "snapcat"
+version = "0.1.0"
+authors = ["Lyn Nagara <lyn.nagara@gmail.com>"]
+
+[dependencies]
+image = "0.18.0"
