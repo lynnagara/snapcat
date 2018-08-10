@@ -2,6 +2,7 @@ BASE_PATH = '.snapshots/'
 
 import re
 import os
+import subprocess
 
 class Snapcat():
   def __init__(self):
@@ -14,6 +15,8 @@ class Snapcat():
     ensure_directory_exists(self.path)
     save(file_path)
 
+  def compare(self):
+    subprocess.call('./target/release/snapcat ./images/pikachu1.png ./images/pikachu2.png 0.2', shell=True)
 
 def sanitize_file_path(path):
   sanitize = path.replace('/', '-')
@@ -24,9 +27,3 @@ def ensure_directory_exists(path):
   dir = os.path.dirname(path)
   if not os.path.exists(dir):
     os.makedirs(path)
-
-
-
-def take(save_snapshot, name):
-  save_snapshot(name=name)
-  print('TODO: take photo')

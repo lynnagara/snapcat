@@ -1,4 +1,5 @@
-/target
+rust/target
+build
 **/*.rs.bk
 .DS_Store
 Cargo.lock
