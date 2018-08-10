@@ -22,13 +22,15 @@ pub unsafe extern "C" fn generate_diffs(threshold: f32) {
 
   for new_file in new_files {
     let orig_file = str::replace(&new_file.as_str(), &orig, &new);
-    image_diff::ImageDiff::compare(orig_file, new_file, threshold)
+    let diff_path = str::replace(&new_file.as_str(), &orig, "diffs");
+    image_diff::ImageDiff::compare(orig_file, new_file, diff_path, threshold);
   }
 }
 
 fn main() {
   let (orig, new, threshold) = get_args();
-  image_diff::ImageDiff::compare(orig, new, threshold)
+  let diff_path = "output.png".to_string();
+  image_diff::ImageDiff::compare(new, orig, diff_path, threshold)
 }
 
 

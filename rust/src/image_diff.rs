@@ -3,22 +3,25 @@ extern crate image;
 use image_diff::image::{DynamicImage, GenericImage, ImageBuffer, Rgba, Pixel};
 use std::path::Path;
 use std::cmp::max;
+use std::fs::create_dir_all;
+
 
 pub struct ImageDiff {}
 
 impl ImageDiff {
-  pub fn compare(base_path: String, new_path: String, threshold: f32) {
+  pub fn compare(base_path: String, new_path: String, diff_path: String, threshold: f32) {
     assert!(threshold <= 1. && threshold >= 0.);
 
     let base_image = get_image_from_path(&base_path);
     let new_image = get_image_from_path(&new_path);
 
-    calculate_diff(base_image, new_image, threshold);
+    let diff_image = get_image_diff(base_image, new_image, threshold);
+    save(diff_image, diff_path);
   }
 }
 
 // TODO: reshape images so sizes will be the same
-fn calculate_diff(base_image: DynamicImage, new_image: DynamicImage, threshold: f32) {
+fn get_image_diff(base_image: DynamicImage, new_image: DynamicImage, threshold: f32) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
   let (width, height) = get_dimensions(&base_image, &new_image);
   let mut image = get_empty_image(width, height);
 
@@ -37,8 +40,7 @@ fn calculate_diff(base_image: DynamicImage, new_image: DynamicImage, threshold: 
       }
     }
   }
-  let path = "output.png";
-  save(image, path);
+  image
 }
 
 fn is_equal(a: [u8; 4], b: [u8; 4], threshold: f32) -> bool {
@@ -77,6 +79,12 @@ fn get_empty_image(width: u32, height: u32) -> ImageBuffer<Rgba<u8>, Vec<u8> > {
   image
 }
 
-fn save(image: ImageBuffer<Rgba<u8>, Vec<u8> >, path: &str) {
+fn save(image: ImageBuffer<Rgba<u8>, Vec<u8> >, path: String) {
+  // ensure_dir_exists(&path);
   image.save(path).unwrap();
 }
+
+// fn ensure_dir_exists(path: &String) {
+//   let new_path = path.split("/").join("")
+//   create_dir_all(new_path);
+// }
