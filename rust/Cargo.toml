@@ -2,7 +2,7 @@
 name = "snapcat"
 version = "0.1.0"
 authors = ["Lyn Nagara <lyn.nagara@gmail.com>"]
-build = "build.rs"
+build = "custom_build.rs"
 
 [lib]
 name = "snapcat"
